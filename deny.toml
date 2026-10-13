@@ -179,6 +179,7 @@ ignore = [
     { id = "RUSTSEC-2024-0436", reason = "paste unmaintained (archived by author), no known vulnerability, no safe upgrade available" },
     { id = "RUSTSEC-2026-0206", reason = "rustybuzz unmaintained (author recommends harfrust), no known vulnerability, no safe upgrade available" },
     { id = "RUSTSEC-2026-0192", reason = "ttf-parser unmaintained (author recommends skrifa), no known vulnerability, no safe upgrade available" },
+    { id = "RUSTSEC-2024-0449", reason = "unsafe-libyaml unmaintained (pulled in by serde_yaml 0.9), no known vulnerability, no safe upgrade available" },
 ]
 
 # ---------------------------------------------------------------------------
