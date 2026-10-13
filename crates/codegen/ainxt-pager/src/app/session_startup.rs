@@ -680,6 +680,15 @@ async fn resolve_existing_session(
 mod tests {
     use super::*;
     use clap::Parser;
+    /// Variant name only, for panic messages (payloads hold session ids).
+    fn startup_kind(startup: &MaterializedStartup) -> &'static str {
+        match startup {
+            MaterializedStartup::NewAuto => "NewAuto",
+            MaterializedStartup::NewWithId { .. } => "NewWithId",
+            MaterializedStartup::Resume { .. } => "Resume",
+            MaterializedStartup::Fork { .. } => "Fork",
+        }
+    }
     fn parse(args: &[&str]) -> PagerArgs {
         PagerArgs::try_parse_from(args).unwrap()
     }
@@ -936,7 +945,7 @@ mod tests {
                 assert!(original_cwd.is_none());
                 assert!(title.is_none());
             }
-            other => panic!("expected Resume, got {other:?}"),
+            other => panic!("expected Resume, got {other:?}", other = startup_kind(&other)),
         }
     }
     /// Chat-mode passthrough rejects ids that could escape the sessions tree
@@ -1066,7 +1075,7 @@ mod tests {
                     "cwd-local Build collision must still be refused after passthrough"
                 );
             }
-            other => panic!("expected Resume, got {other:?}"),
+            other => panic!("expected Resume, got {other:?}", other = startup_kind(&other)),
         }
     }
 }
